@@ -14,7 +14,7 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 void	initiate_mlx_setting(t_mlx *mlx)
 {
 	mlx->mlx_instance_addr = mlx_init();
-	mlx->mlx_win = mlx_new_window(mlx->mlx_instance_addr, 1920, 1080, "fdf!");
+	mlx->mlx_win = mlx_new_window(mlx->mlx_instance_addr, 1920, 1080, "cub3D");
 	mlx->img_instance = mlx_new_image(mlx->mlx_instance_addr, 1920, 1080);
 	mlx->img_instance_addr = mlx_get_data_addr(mlx->img_instance, &mlx->bits_per_pixel, \
 	&mlx->line_length, &mlx->endian);
@@ -76,8 +76,11 @@ int main()
         double sideDistX;
         double sideDistY;
 
-        double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : fabs(1 / rayDirX));
-        double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : fabs(1 / rayDirY));
+        // double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : fabs(1 / rayDirX));
+        // double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : fabs(1 / rayDirY));
+
+        double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+        double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
 
         //Camera 평면에서 벽까지의 수직 거리
         double perpWallDist;
@@ -156,9 +159,20 @@ int main()
 		int drawEnd = (height / 2) + (wallHeight / 2);
 		if(drawEnd >= height)
 			drawEnd = height - 1;
-		if (x == 990 || x == 991)
+		if (x == 960)
 		{
-
+            printf("-----------960-----------\n");
+			printf("deltaDistX: %f\n", deltaDistX);
+			printf("deltaDistY: %f\n", deltaDistY);
+			printf("sideDistX: %f\n", sideDistX);
+			printf("sideDistY: %f\n", sideDistY);
+			printf("side: %d\n", side);
+			printf("perpWallDist: %f\n", perpWallDist);
+			printf("x: %d, drawStart: %d, drawEnd: %d\n", x, drawStart, drawEnd);
+		}
+		if (x == 961)
+		{
+            printf("-----------961------------\n");
 			printf("deltaDistX: %f\n", deltaDistX);
 			printf("deltaDistY: %f\n", deltaDistY);
 			printf("sideDistX: %f\n", sideDistX);
