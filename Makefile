@@ -2,7 +2,7 @@ CC = cc
 
 NAME = cub3D
 
-SRCS = main.c
+SRCS = main_textured.c
 
 OBJS = $(SRCS:.c=.o)
 

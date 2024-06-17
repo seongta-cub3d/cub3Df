@@ -159,28 +159,6 @@ int main()
 		int drawEnd = (height / 2) + (wallHeight / 2);
 		if(drawEnd >= height)
 			drawEnd = height - 1;
-		if (x == 960)
-		{
-            printf("-----------960-----------\n");
-			printf("deltaDistX: %f\n", deltaDistX);
-			printf("deltaDistY: %f\n", deltaDistY);
-			printf("sideDistX: %f\n", sideDistX);
-			printf("sideDistY: %f\n", sideDistY);
-			printf("side: %d\n", side);
-			printf("perpWallDist: %f\n", perpWallDist);
-			printf("x: %d, drawStart: %d, drawEnd: %d\n", x, drawStart, drawEnd);
-		}
-		if (x == 961)
-		{
-            printf("-----------961------------\n");
-			printf("deltaDistX: %f\n", deltaDistX);
-			printf("deltaDistY: %f\n", deltaDistY);
-			printf("sideDistX: %f\n", sideDistX);
-			printf("sideDistY: %f\n", sideDistY);
-			printf("side: %d\n", side);
-			printf("perpWallDist: %f\n", perpWallDist);
-			printf("x: %d, drawStart: %d, drawEnd: %d\n", x, drawStart, drawEnd);
-		}
 		draw_vertical_line(&mlx, x, drawStart, drawEnd, side);
     }
 
