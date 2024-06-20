@@ -4,24 +4,24 @@
 void	set_user_vector(t_user *user, t_screen *screen, int y, int x)
 {
 	(void)screen;
-	user->posX = x;
-	user->posY = y;
+	user->pos_x = x;
+	user->pos_y = y;
 
 	if (worldmap[y][x] == 'N' || worldmap[y][x] == 'S')
 	{
-		user->dirX = 0;
+		user->dir_x = 0;
 		if (worldmap[y][x] == 'N')
-			user->dirY = 1;
+			user->dir_y = 1;
 		else
-			user->dirY = -1;
+			user->dir_y = -1;
 	}
 	if (worldmap[y][x] == 'E' || worldmap[y][x] == 'W')
 	{
-		user->dirY = 0;
+		user->dir_y = 0;
 		if (worldmap[y][x] == 'E')
-			user->dirX = 1;
+			user->dir_x = 1;
 		else
-			user->dirX = -1;
+			user->dir_x = -1;
 	}
 	return ;
 }
@@ -45,8 +45,10 @@ void	init_user(t_user *user, t_screen *screen)
 				}
 		}
 	}
-	user->planeX = 0.0;
-	user->planeY = 0.66;
+	user->plane_x = 0.0;
+	user->plane_y = 0.66;
+	user->move_speed = 0.05;
+	user->rot_speed = 0.05;
 	return ;
 }
 
@@ -70,13 +72,32 @@ void	init_mlx(t_mlx *mlx)
 	return ;
 }
 
+void	init_screen(t_screen *screen)
+{
+	int	i;
+	int	y;
+	int	x;
 
-void	init_structs(t_user *user, t_mlx *mlx, t_screen *screen, t_texture *texture)
+	screen->buffer = (int **)malloc(sizeof(int *) * height);
+	i = -1;
+	while (++i < height)
+		screen->buffer[i] = (int *)malloc(sizeof(int *) * width);
+
+	y = -1;
+	while (++y < height)
+	{
+		x = -1;
+		while (++x < width)
+			screen->buffer[y][x] = 0;
+	}
+	return ;
+}
+
+
+void	init_structs(t_user *user, t_mlx *mlx, t_screen *screen)
 {
 	init_user(user, screen);
 	init_mlx(mlx);
-	(void)texture;
-	// init_screen(screen);
-	// init_texture(texture);
+	init_screen(screen);
 	return ;
 }

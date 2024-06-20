@@ -2,7 +2,8 @@ CC = cc
 
 NAME = cub3D
 
-SRCS = main.c init_structs.c
+SRCS = main.c draw_buffer.c execution_main.c fill_buffer_util.c init_structs.c \
+		
 
 OBJS = $(SRCS:.c=.o)
 
