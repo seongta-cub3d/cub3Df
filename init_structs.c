@@ -50,12 +50,32 @@ void	init_user(t_user *user, t_screen *screen)
 	return ;
 }
 
+void	init_mlx(t_mlx *mlx)
+{
+	mlx->mlx = mlx_init();
+	if (mlx->mlx == NULL)
+	{
+		perror("failed initiating mlx instance\n");
+		exit(1);
+	}
+	mlx->win = mlx_new_window(mlx->mlx, 1920, 1080, "cub3D!");
+	if (mlx->win == NULL)
+	{
+		perror("failed initiating window instance\n");
+		exit(1);
+	}
+	mlx->img = mlx_new_image(mlx->mlx, 1920, 1080);
+	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, \
+	&mlx->line_length, &mlx->endian);
+	return ;
+}
+
+
 void	init_structs(t_user *user, t_mlx *mlx, t_screen *screen, t_texture *texture)
 {
 	init_user(user, screen);
-	(void)mlx;
+	init_mlx(mlx);
 	(void)texture;
-	// init_mlx(mlx);
 	// init_screen(screen);
 	// init_texture(texture);
 	return ;
