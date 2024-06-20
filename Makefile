@@ -2,11 +2,11 @@ CC = cc
 
 NAME = cub3D
 
-SRCS = main_textured.c
+SRCS = main.c init_structs.c
 
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 MLXFLAGS =  -L./minilibx -lmlx -framework OpenGL -framework AppKit
 

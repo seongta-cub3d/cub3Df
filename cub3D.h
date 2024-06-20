@@ -1,7 +1,7 @@
 
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef cub3D_H
+# define cub3D_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -19,70 +19,51 @@
 #define width 1920
 #define height 1080
 
-typedef struct s_mlx {
-	void		*img_instance;
-	char		*img_instance_addr;
-	void		*mlx_instance_addr;
-	void		*mlx_win;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_mlx;
+#define BACKWARD 1
+#define FORWARD 13
+#define ROTATE_LEFT 123
+#define ROTATE_RIGHT 124
+#define ESC 53
 
-typedef struct	s_img
-{
-	void	*img;
-	int		*data;
+extern int	worldmap[mapHeight][mapWidth];
 
-	int		size_l;
-	int		bpp;
-	int		endian;
-}				t_img;
-
-typedef struct	s_info
-{
-	double posX;
-	double posY;
-	double dirX;
-	double dirY;
-	double planeX;
-	double planeY;
-	t_img	img;
-	int		**buf;
-	int		texture[8][texHeight * texWidth];
+typedef struct s_user {
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
 	double	moveSpeed;
 	double	rotSpeed;
+}	t_user;
+
+typedef struct s_mlx {
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_mlx;
+
+typedef struct s_screen {
+	//screen 구조체
+	int		*floor;
+	int		*ceiling;
+	char	**texpath_ary;
+	int		**buffer;
+	int		tex_ary[4][texHeight * texWidth];
 	int		re_buf;
-}				t_info;
+}	t_screen;
 
 
-int	worldMap[mapWidth][mapHeight] =
-						{
-							{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
-							{4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
-							{4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
-							{4,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
-							{4,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
-							{4,0,4,0,0,0,0,5,5,5,5,5,5,5,5,5,7,7,0,7,7,7,7,7},
-							{4,0,5,0,0,0,0,5,0,5,0,5,0,5,0,5,7,0,0,0,7,7,7,1},
-							{4,0,6,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
-							{4,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,1},
-							{4,0,8,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
-							{4,0,0,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,7,7,7,1},
-							{4,0,0,0,0,0,0,5,5,5,5,0,5,5,5,5,7,7,7,7,7,7,7,1},
-							{6,6,6,6,6,6,6,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
-							{8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
-							{6,6,6,6,6,6,0,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
-							{4,4,4,4,4,4,0,4,4,4,6,0,6,2,2,2,2,2,2,2,3,3,3,3},
-							{4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
-							{4,0,0,0,0,0,0,0,0,0,0,0,6,2,0,0,5,0,0,2,0,0,0,2},
-							{4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
-							{4,0,6,0,6,0,0,0,0,4,6,0,0,0,0,0,5,0,0,0,0,0,0,2},
-							{4,0,0,5,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
-							{4,0,6,0,6,0,0,0,0,4,6,0,6,2,0,0,5,0,0,2,0,0,0,2},
-							{4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
-							{4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3}
-						};
+typedef struct s_texture {
+	//texture 배열의 각 요소 하나하나가 품고 있는 정보들
+}	t_texture;
+
+void	init_structs(t_user *user, t_mlx *mlx, t_screen *screen, t_texture *texture);
 
 
 #endif
