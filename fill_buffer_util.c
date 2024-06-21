@@ -32,7 +32,8 @@ void    init_step_and_sidedist(t_user *user, t_calc *var)
 	if (var->raydir_y < 0)
 	{
 		var->step_y = -1;
-		var->side_dist_y = (user->pos_x - var->map_y) * var->delta_dist_y;
+		//user->pos_y가 user->pos_x로 되어 있었음
+		var->side_dist_y = (user->pos_y - var->map_y) * var->delta_dist_y;
 	}
 	else
 	{
@@ -50,15 +51,23 @@ void    init_vars(t_user *user, t_calc *var, int x)
     var->raydir_x = user->dir_x + user->plane_x * var->camera_x;
     var->raydir_y = user->dir_y + user->plane_y * var->camera_x;
 
+	printf("dirX: %f, dirY: %f \n", user->dir_x, user->dir_y);
+	printf("planeX: %f, planeY: %f \n", user->plane_x, user->plane_y);
+	printf("raydirX: %f, raydirY: %f \n", var->raydir_x, var->raydir_y);
+
     var->map_x = (int)user->pos_x;
     var->map_y = (int)user->pos_y;
 
-    var->delta_dist_x = fabs(1 / var->raydir_x);
-    var->delta_dist_y = fabs(1 / var->raydir_y);
+    // var->delta_dist_x = fabs(1 / var->raydir_x);
+    // var->delta_dist_y = fabs(1 / var->raydir_y);
+
+	var->delta_dist_x = (var->raydir_y == 0) ? 0 : ((var->raydir_x == 0) ? 1 : fabs(1 / var->raydir_x));
+	var->delta_dist_y = (var->raydir_x == 0) ? 0 : ((var->raydir_y == 0) ? 1 : fabs(1 / var->raydir_y));
 
     var->hit = 0;
-
     init_step_and_sidedist(user, var);
+	printf("sidedistX: %f, sidedistY: %f \n", var->side_dist_x, var->side_dist_y);
+	printf("deltadistX: %f, deltadistY: %f \n", var->delta_dist_x, var->delta_dist_y);
     return ;
 }
 
@@ -78,8 +87,12 @@ void    shoot_ray(t_calc *var)
 			var->map_y += var->step_y;
 			var->side = 1;
 		}
+		//y x 뒤바뀌어 있던 거 바꿈
 		if (worldmap[var->map_y][var->map_x] > 0)
+		{
+			printf("map_y: %d, map_x: %d\n", var->map_y, var->map_x);
             var->hit = 1;
+		}
 	}
     return ;
 }
@@ -130,13 +143,16 @@ void    calc_texture_coor(t_calc *var, t_screen *screen, int x)
 {
     int y;
     int color;
+	int flag;
+
+	flag = 0;
 
     y = var->draw_start;
     while (y < var->draw_end)
     {
         var->tex_y = (int)var->tex_pos & (texHeight - 1);
         var->tex_pos += var->step;
-        color = screen->tex_ary[var->tex_num].tex_info[texHeight * var->tex_y + var->tex_x];
+        color = screen->tex_ary[1].tex_data[texHeight * var->tex_y + var->tex_x];
         if (var->side == 1)
             color = (color >> 1) & 8355711;
         screen->buffer[y][x] = color;
@@ -144,7 +160,6 @@ void    calc_texture_coor(t_calc *var, t_screen *screen, int x)
     }
     return ;
 }
-
 
 void    calc_texture(t_calc *var, t_user *user, t_screen *screen, int x)
 {

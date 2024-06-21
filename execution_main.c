@@ -6,16 +6,16 @@ void	fill_buffer(t_user *user, t_screen *screen)
 	t_calc	var;
 	int		x;
 
-	x = 0;
-	while (x < width)
+	x = -1;
+	while (++x < width)
 	{
+		printf("------------------------\n");
+		printf("screen_x: %d\n", x);
 		init_vars(user, &var, x);
 		shoot_ray(&var);
 		fish_eye_correction(&var, user);
 		calc_draw_y_coordinates(&var);
 		calc_texture(&var, user, screen, x);
-		//texture 계산 & buffer 채우기
-		x++;
 	}
 	return ;
 }

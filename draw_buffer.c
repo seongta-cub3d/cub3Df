@@ -7,6 +7,7 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 
 	if (!(0 <= x && x <= 1920) || !(0 <= y && y <= 1080))
 		return ;
+    // printf("my_mlx-> line_length: %d bits_per_pixel: %d\n", mlx->line_length, mlx->bits_per_pixel);
 	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
@@ -21,9 +22,7 @@ void    draw_buffer(t_mlx *mlx, t_screen *screen)
     {
         x = -1;
         while (++x < width)
-        {
             my_mlx_pixel_put(mlx, x, y, screen->buffer[y][x]);
-        }
     }
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
     return ;

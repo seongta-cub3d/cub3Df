@@ -28,35 +28,39 @@
 extern int	worldmap[mapHeight][mapWidth];
 
 typedef struct s_user {
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	move_speed;
-	double	rot_speed;
+	double	pos_x; //
+	double	pos_y; //
+	double	dir_x; // 
+	double	dir_y; //
+	double	plane_x; //
+	double	plane_y; //
+	double	move_speed; //
+	double	rot_speed; //
 }	t_user;
 
 typedef struct s_mlx {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void	*mlx; //
+	void	*win; // 
+	void	*img; //
+	char	*addr; // 
+	int		bits_per_pixel; //
+	int		line_length; //
+	int		endian; //
 }	t_mlx;
 
 typedef struct s_texture {
-	char	*tex_path;  //parsing to-do
-	int		*tex_info;  //execution to-do
-	int		tex_height; //execution to-do
-	int		tex_width;  //execution to-do
+	//t_map worldmap; parsing to-do: 지금은 main문에 선언한 임시 worldmap 사용 중
+	void				*img;
+	char				*tex_path;
+	unsigned int		*tex_data;
+	int					tex_height;
+	int					tex_width;
+	int					bits_per_pixel;
+	int					size_line;
+	int					endian;
 }	t_texture;
 
 typedef struct s_screen {
-	//t_map worldmap; parsing to-do: 지금은 main문에 선언한 임시 worldmap 사용 중
 	int		*floor;  //parsing to-do
 	int		*ceiling; //parsing to-do
 	t_texture *tex_ary; //parsing to-do: tex_ary 안에 tex_path 넣어주기
@@ -97,8 +101,14 @@ typedef struct s_calc{
 	int		color;
 }	t_calc;
 
+typedef struct s_struc{
+	t_user *user;
+	t_screen *screen;
+	t_mlx *mlx;
+} t_struc;
 
 void	init_structs(t_user *user, t_mlx *mlx, t_screen *screen);
+void	init_screen(t_mlx *mlx, t_screen *screen);
 void	execution_main(t_user *user, t_mlx *mlx, t_screen *screen);
 void	fill_buffer(t_user *user, t_screen *screen);
 void    clear_buffer(t_screen *screen);
@@ -112,5 +122,7 @@ void    calc_texture(t_calc *var, t_user *user, t_screen *screen, int x);
 void    calc_texture_vars(t_calc *var, t_user *user);
 void    calc_texture_coor(t_calc *var, t_screen *screen, int x);
 void    draw_buffer(t_mlx *mlx, t_screen *screen);
+void    init_tex_ary(t_mlx *mlx, t_screen *screen);
+int    key_press(int key, t_struc *struc);
 
 #endif
