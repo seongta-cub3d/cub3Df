@@ -17,9 +17,23 @@ int key_press(int key, t_struc *struc)
 		if (!worldmap[(int)(struc->user->pos_x)][(int)(struc->user->pos_y - struc->user->dir_y * struc->user->move_speed)])
 			struc->user->pos_y -= struc->user->dir_y * struc->user->move_speed;
 	}
-	if (key == ROTATE_RIGHT)
+    if (key == RIGHT)
 	{
-		//both camera direction and camera plane must be rotated
+		if (!worldmap[(int)(struc->user->pos_x + struc->user->plane_x * struc->user->move_speed)][(int)(struc->user->pos_y)])
+			struc->user->pos_x += struc->user->plane_x * struc->user->move_speed;
+		if (!worldmap[(int)(struc->user->pos_x)][(int)(struc->user->pos_y + struc->user->plane_y * struc->user->move_speed)])
+			struc->user->pos_y += struc->user->plane_y * struc->user->move_speed;
+	}
+    if (key == LEFT)
+	{
+		if (!worldmap[(int)(struc->user->pos_x - struc->user->plane_x * struc->user->move_speed)][(int)(struc->user->pos_y)])
+			struc->user->pos_x -= struc->user->plane_x * struc->user->move_speed;
+		if (!worldmap[(int)(struc->user->pos_x)][(int)(struc->user->pos_y - struc->user->plane_y * struc->user->move_speed)])
+			struc->user->pos_y -= struc->user->plane_y * struc->user->move_speed;
+	}
+
+	if (key == ROTATE_LEFT)
+	{
 		double olddir_x = struc->user->dir_x;
 		struc->user->dir_x = struc->user->dir_x * cos(-struc->user->rot_speed) - struc->user->dir_y * sin(-struc->user->rot_speed);
 		struc->user->dir_y = olddir_x * sin(-struc->user->rot_speed) + struc->user->dir_y * cos(-struc->user->rot_speed);
@@ -27,9 +41,8 @@ int key_press(int key, t_struc *struc)
 		struc->user->plane_x = struc->user->plane_x * cos(-struc->user->rot_speed) - struc->user->plane_y * sin(-struc->user->rot_speed);
 		struc->user->plane_y = oldplane_x * sin(-struc->user->rot_speed) + struc->user->plane_y * cos(-struc->user->rot_speed);
 	}
-	if (key == ROTATE_LEFT)
+	if (key == ROTATE_RIGHT)
 	{
-		//both camera direction and camera plane must be rotated
 		double olddir_x = struc->user->dir_x;
 		struc->user->dir_x = struc->user->dir_x * cos(struc->user->rot_speed) - struc->user->dir_y * sin(struc->user->rot_speed);
 		struc->user->dir_y = olddir_x * sin(struc->user->rot_speed) + struc->user->dir_y * cos(struc->user->rot_speed);

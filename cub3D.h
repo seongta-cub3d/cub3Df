@@ -21,6 +21,8 @@
 
 #define BACKWARD 1
 #define FORWARD 13
+#define LEFT 0
+#define RIGHT 2
 #define ROTATE_LEFT 123
 #define ROTATE_RIGHT 124
 #define ESC 53
@@ -28,24 +30,24 @@
 extern int	worldmap[mapHeight][mapWidth];
 
 typedef struct s_user {
-	double	pos_x; //
-	double	pos_y; //
-	double	dir_x; // 
-	double	dir_y; //
-	double	plane_x; //
-	double	plane_y; //
-	double	move_speed; //
-	double	rot_speed; //
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	move_speed;
+	double	rot_speed;
 }	t_user;
 
 typedef struct s_mlx {
-	void	*mlx; //
-	void	*win; // 
-	void	*img; //
-	char	*addr; // 
-	int		bits_per_pixel; //
-	int		line_length; //
-	int		endian; //
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_mlx;
 
 typedef struct s_texture {
@@ -124,5 +126,8 @@ void    calc_texture_coor(t_calc *var, t_screen *screen, int x);
 void    draw_buffer(t_mlx *mlx, t_screen *screen);
 void    init_tex_ary(t_mlx *mlx, t_screen *screen);
 int    key_press(int key, t_struc *struc);
+void    draw_floor_and_ceiling(t_calc *var, t_screen *screen, int x);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void	print_worldmap();
 
 #endif

@@ -51,23 +51,14 @@ void    init_vars(t_user *user, t_calc *var, int x)
     var->raydir_x = user->dir_x + user->plane_x * var->camera_x;
     var->raydir_y = user->dir_y + user->plane_y * var->camera_x;
 
-	printf("dirX: %f, dirY: %f \n", user->dir_x, user->dir_y);
-	printf("planeX: %f, planeY: %f \n", user->plane_x, user->plane_y);
-	printf("raydirX: %f, raydirY: %f \n", var->raydir_x, var->raydir_y);
-
     var->map_x = (int)user->pos_x;
     var->map_y = (int)user->pos_y;
-
-    // var->delta_dist_x = fabs(1 / var->raydir_x);
-    // var->delta_dist_y = fabs(1 / var->raydir_y);
 
 	var->delta_dist_x = (var->raydir_y == 0) ? 0 : ((var->raydir_x == 0) ? 1 : fabs(1 / var->raydir_x));
 	var->delta_dist_y = (var->raydir_x == 0) ? 0 : ((var->raydir_y == 0) ? 1 : fabs(1 / var->raydir_y));
 
     var->hit = 0;
     init_step_and_sidedist(user, var);
-	printf("sidedistX: %f, sidedistY: %f \n", var->side_dist_x, var->side_dist_y);
-	printf("deltadistX: %f, deltadistY: %f \n", var->delta_dist_x, var->delta_dist_y);
     return ;
 }
 
@@ -90,7 +81,6 @@ void    shoot_ray(t_calc *var)
 		//y x 뒤바뀌어 있던 거 바꿈
 		if (worldmap[var->map_y][var->map_x] > 0)
 		{
-			printf("map_y: %d, map_x: %d\n", var->map_y, var->map_x);
             var->hit = 1;
 		}
 	}

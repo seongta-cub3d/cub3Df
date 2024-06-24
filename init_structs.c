@@ -23,6 +23,9 @@ void	set_user_vector(t_user *user, t_screen *screen, int y, int x)
 		else
 			user->dir_x = -1;
 	}
+	printf("----------------------------------------before\n");
+	print_worldmap();
+	printf("----------------------------------------after\n");
 	return ;
 }
 
@@ -57,6 +60,8 @@ void	init_user(t_user *user, t_screen *screen)
 	int	y;
 	int	x;
 
+	user->move_speed = 0.05;
+	user->rot_speed = 0.05;
 	y = -1;
 	while (++y < mapHeight)
 	{
@@ -68,12 +73,11 @@ void	init_user(t_user *user, t_screen *screen)
 				{
 					set_user_vector(user, screen, y, x);
 					init_camera_plane(user, y, x);
-					break;
+					worldmap[y][x] = 0;
+					return ;
 				}
 		}
 	}
-	user->move_speed = 0.05;
-	user->rot_speed = 0.05;
 	return ;
 }
 

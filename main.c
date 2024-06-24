@@ -33,6 +33,18 @@
 						};
 
 
+void	print_worldmap()
+{
+	for (int y = 0; y < mapHeight; y++)
+	{
+		for (int x = 0; x < mapWidth; x++)
+		{
+			printf("%d ", worldmap[y][x]);
+		}
+		printf("\n");
+	}
+}
+
 int main()
 {
 	t_struc		struc;
@@ -44,10 +56,13 @@ int main()
 	struc.user = &user;
 	struc.screen = &screen;
 
+	print_worldmap();
+
 	init_structs(&user, &mlx, &screen);
 
 	execution_main(&user, &mlx, &screen);
 	mlx_key_hook(mlx.win, &key_press, &struc);
+	// mlx_hook(mlx.win, 2, 1L << 0, &key_press, &mlx);
 	mlx_loop(mlx.mlx); 
 
 	//프로그램이 끝날 때 해주어야 할 것들
