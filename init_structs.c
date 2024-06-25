@@ -3,8 +3,8 @@
 
 void	set_user_vector(t_user *user, t_screen *screen, int y, int x)
 {
-	user->pos_x = x;
-	user->pos_y = y;
+	user->pos_x = x + 0.5;
+	user->pos_y = y + 0.5;
 	if (screen->worldmap.worldmap[y][x] == 'N' || screen->worldmap.worldmap[y][x] == 'S')
 	{
 		user->dir_x = 0;

@@ -78,9 +78,7 @@ void    shoot_ray(t_calc *var, t_screen *screen)
 			var->side = 1;
 		}
 		if (screen->worldmap.worldmap[var->map_y][var->map_x] > 0)
-		{
             var->hit = 1;
-		}
 	}
     return ;
 }
@@ -90,17 +88,20 @@ void    fish_eye_correction(t_calc *var, t_user *user)
     if (var->side == 0)
 		var->perpwall_dist = (var->map_x - user->pos_x + (1 - var->step_x) / 2) / var->raydir_x;
 	else
-		var->perpwall_dist = (var->map_y - user->pos_y + (1 - var->step_y) / 2) / var->raydir_y;   
+		var->perpwall_dist = (var->map_y - user->pos_y + (1 - var->step_y) / 2) / var->raydir_y;
+	if (fabs(var->perpwall_dist) < NEAR_ZERO)
+		var->perpwall_dist = 0.01;
+	return ;
 }
 
 void    calc_draw_y_coordinates(t_calc *var)
 {
     var->line_height = (int)(height / var->perpwall_dist);
 
-	var->draw_start = -var->line_height / 2 + height / 2;
+	var->draw_start = height / 2 - var->line_height / 2;
 	if (var->draw_start < 0)
 		var->draw_start = 0;
-	var->draw_end = var->line_height / 2 + height / 2;
+	var->draw_end = height / 2 + var->line_height / 2;
 	if (var->draw_end >= height)
 		var->draw_end = height - 1;
     return ;

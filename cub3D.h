@@ -30,6 +30,8 @@
 # define ROTATE_RIGHT 124
 # define ESC 53
 
+# define NEAR_ZERO 1e-9
+
 typedef struct s_user {
 	double	pos_x;
 	double	pos_y;
