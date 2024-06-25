@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/06/25 18:23:44 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/06/25 20:33:30 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ int	color_data_extract(char *color)
 		check_num(split_line[1]) || \
 		check_num(split_line[2]))
 		return (free_split(split_line, -1));
+	if (!(0 <= ft_atoi(split_line[0]) && ft_atoi(split_line[0]) <= 255) || \
+		!(0 <= ft_atoi(split_line[1]) && ft_atoi(split_line[1]) <= 255) || \
+		!(0 <= ft_atoi(split_line[2]) && ft_atoi(split_line[2]) <= 255))
+		return (free_split(split_line, -1));
 	colori += (ft_atoi(split_line[0]) << 16);
 	colori += (ft_atoi(split_line[1]) << 8);
 	colori += ft_atoi(split_line[2]);
@@ -91,7 +95,7 @@ int	element_to_int(char *element)
 	else if (ft_strncmp(element, "EA", 3) == 0)
 		return (2);
 	else if (ft_strncmp(element, "WE", 3) == 0)
-		return (3); 
+		return (3);
 	else if (ft_strncmp(element, "F", 2) == 0)
 		return (4);
 	else if (ft_strncmp(element, "C", 2) == 0)
@@ -114,14 +118,15 @@ int	identifier_parsing(t_screen *screen, char *line, int *count)
 		return (free_split(split_line, 2));
 	if ((*count & (1 << element)) != 0)
 		return (free_split(split_line, 3));
-	split_line[1][(size_t)(ft_strchr(split_line[1], '\n') - split_line[1])] \
-																= '\0';
+	split_line[1][ft_strlen(split_line[1]) - 1] = '\0';
 	if (element < 4)
 		screen->tex_ary[element].tex_path = ft_strdup(split_line[1]);
 	else if (element == 4)
 		screen->floor = color_data_extract(split_line[1]);
 	else if (element == 5)
 		screen->ceiling = color_data_extract(split_line[1]);
+	if (screen->floor == -1 || screen->ceiling == -1)
+		return (free_split(split_line, 4));
 	*count |= (1 << element);
 	return (free_split(split_line, 0));
 }
@@ -288,9 +293,7 @@ void	flood(t_map *map, int **visited, t_queue **queue, t_pair coor)
 		_error("map invalid", 1);
 	if (0 <= y && y < map->map_height && 0 <= x && \
 		x < map->map_width && map->worldmap[y][x] == -1)
-	{
 		_error("map invalid", 2);
-	}
 	if (0 <= y && y < map->map_height && \
 		0 <= x && x < map->map_width && \
 		map->worldmap[y][x] != -1 && \
