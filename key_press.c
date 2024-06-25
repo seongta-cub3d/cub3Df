@@ -3,35 +3,50 @@
 
 int key_press(int key, t_struc *struc)
 {
-    if (key == FORWARD)
+	int new_x;
+	int new_y;
+
+	if (key == FORWARD)
 	{
-		if (!worldmap[(int)(struc->user->pos_x + struc->user->dir_x * struc->user->move_speed)][(int)(struc->user->pos_y)])
+		new_x = (int)(struc->user->pos_x + struc->user->dir_x * struc->user->move_speed);
+		new_y = (int)(struc->user->pos_y + struc->user->dir_y * struc->user->move_speed);
+		if (!worldmap[new_y][new_x])
+		{
 			struc->user->pos_x += struc->user->dir_x * struc->user->move_speed;
-		if (!worldmap[(int)(struc->user->pos_x)][(int)(struc->user->pos_y + struc->user->dir_y * struc->user->move_speed)])
 			struc->user->pos_y += struc->user->dir_y * struc->user->move_speed;
+		}
 	}
 	if (key == BACKWARD)
 	{
-		if (!worldmap[(int)(struc->user->pos_x - struc->user->dir_x * struc->user->move_speed)][(int)(struc->user->pos_y)])
+		new_x = (int)(struc->user->pos_x - struc->user->dir_x * struc->user->move_speed);
+		new_y = (int)(struc->user->pos_y - struc->user->dir_y * struc->user->move_speed);
+		if (!worldmap[new_y][new_x])
+		{
 			struc->user->pos_x -= struc->user->dir_x * struc->user->move_speed;
-		if (!worldmap[(int)(struc->user->pos_x)][(int)(struc->user->pos_y - struc->user->dir_y * struc->user->move_speed)])
 			struc->user->pos_y -= struc->user->dir_y * struc->user->move_speed;
+		}
 	}
     if (key == RIGHT)
 	{
-		if (!worldmap[(int)(struc->user->pos_x + struc->user->plane_x * struc->user->move_speed)][(int)(struc->user->pos_y)])
+		new_x = (int)(struc->user->pos_x + struc->user->plane_x * struc->user->move_speed);
+		new_y = (int)(struc->user->pos_y + struc->user->plane_y * struc->user->move_speed);
+		if (!worldmap[new_y][new_x])
+		{
 			struc->user->pos_x += struc->user->plane_x * struc->user->move_speed;
-		if (!worldmap[(int)(struc->user->pos_x)][(int)(struc->user->pos_y + struc->user->plane_y * struc->user->move_speed)])
 			struc->user->pos_y += struc->user->plane_y * struc->user->move_speed;
+		}
 	}
     if (key == LEFT)
 	{
-		if (!worldmap[(int)(struc->user->pos_x - struc->user->plane_x * struc->user->move_speed)][(int)(struc->user->pos_y)])
+		new_x = (int)(struc->user->pos_x - struc->user->plane_x * struc->user->move_speed);
+		new_y = (int)(struc->user->pos_y - struc->user->plane_y * struc->user->move_speed);
+		if (!worldmap[new_y][new_x])
+		{
 			struc->user->pos_x -= struc->user->plane_x * struc->user->move_speed;
-		if (!worldmap[(int)(struc->user->pos_x)][(int)(struc->user->pos_y - struc->user->plane_y * struc->user->move_speed)])
 			struc->user->pos_y -= struc->user->plane_y * struc->user->move_speed;
-	}
+		}
 
+	}
 	if (key == ROTATE_LEFT)
 	{
 		double olddir_x = struc->user->dir_x;
@@ -55,4 +70,10 @@ int key_press(int key, t_struc *struc)
 	mlx_clear_window(struc->mlx->mlx, struc->mlx->win);
     execution_main(struc->user, struc->mlx, struc->screen);
     return (0);
+}
+
+int	exit_hook(t_mlx *mlx)
+{
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	exit(0);
 }

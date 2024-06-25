@@ -23,9 +23,6 @@ void	set_user_vector(t_user *user, t_screen *screen, int y, int x)
 		else
 			user->dir_x = -1;
 	}
-	printf("----------------------------------------before\n");
-	print_worldmap();
-	printf("----------------------------------------after\n");
 	return ;
 }
 
