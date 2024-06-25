@@ -8,7 +8,7 @@ void    draw_floor(t_calc *var, t_screen *screen, int x)
     y = var->draw_end;
     while (y < height)
     {
-        screen->buffer[y][x] = 0x0000FF00;
+        screen->buffer[y][x] = screen->floor;
         y++;
     }
     return ;
@@ -20,7 +20,7 @@ void    draw_ceiling(t_calc *var, t_screen *screen ,int x)
 
     y = -1;   
     while (++y < var->draw_start)
-        screen->buffer[y][x] = 0x000000FF;
+        screen->buffer[y][x] = screen->ceiling;
     return ;
 }
 

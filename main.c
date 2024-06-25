@@ -35,7 +35,7 @@
 
 
 //헤더파일에 int exit_hook(t_mlx *mlx)추가 바람
-int main()
+int main(int argc, char *argv[])
 {
 	t_struc		struc;
 	t_user		user;
@@ -46,6 +46,8 @@ int main()
 	struc.user = &user;
 	struc.screen = &screen;
 
+	(void)argc;
+	parsing_map(&screen, argv[1]);
 	init_structs(&user, &mlx, &screen);
 	execution_main(&user, &mlx, &screen);
 	mlx_hook(mlx.win, 2, 1L << 0, &key_press, &struc);
