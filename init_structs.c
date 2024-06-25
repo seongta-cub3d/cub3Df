@@ -67,12 +67,11 @@ void	init_user(t_user *user, t_screen *screen)
 		{
 			if (worldmap[y][x] == 'N' || worldmap[y][x] == 'S' ||
 				worldmap[y][x] == 'W' || worldmap[y][x] == 'E')
-				{
-					set_user_vector(user, screen, y, x);
-					init_camera_plane(user, y, x);
-					worldmap[y][x] = 0;
-					return ;
-				}
+			{
+				set_user_vector(user, screen, y, x);
+				init_camera_plane(user, y, x);
+				break ;
+			}
 		}
 	}
 	return ;
@@ -118,6 +117,7 @@ void	init_screen(t_mlx *mlx, t_screen *screen)
 	init_tex_ary(mlx, screen);
 	return ;
 }
+
 
 
 void	init_structs(t_user *user, t_mlx *mlx, t_screen *screen)

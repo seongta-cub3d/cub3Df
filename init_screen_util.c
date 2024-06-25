@@ -5,8 +5,8 @@ void    init_tex_ary(t_mlx *mlx, t_screen *screen)
 {
     int     i;
 
-    screen->tex_ary = (t_texture *)malloc(sizeof(t_texture) * 4);
-    //parsing to do 
+    // screen->tex_ary = (t_texture *)malloc(sizeof(t_texture) * 4);
+    //parsing to do
     //-일단 하드코딩으로 구현했으니 파싱부에서 tex_path에 경로 넣어주는 작업 해주면 됨.
     screen->tex_ary[0].tex_path = "./textures/barrel.xpm";
     screen->tex_ary[1].tex_path = "./textures/bluestone.xpm";

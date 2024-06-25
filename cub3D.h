@@ -1,31 +1,38 @@
 
-
-#ifndef cub3D_H
-# define cub3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+# include <fcntl.h>
 # include "./minilibx/mlx.h"
 # include "./libft/libft.h"
 
-#define X_EVENT_KEY_PRESS	2
-#define X_EVENT_KEY_EXIT	17
-#define texWidth 64
-#define texHeight 64
-#define mapWidth 24
-#define mapHeight 24
-#define width 1920
-#define height 1080
+# define X_EVENT_KEY_PRESS 2
+# define X_EVENT_KEY_EXIT 17
+# define texWidth 64
+# define texHeight 64
+# define mapWidth 24
+# define mapHeight 24
+# define width 1920
+# define height 1080
 
-#define BACKWARD 1
-#define FORWARD 13
-#define LEFT 0
-#define RIGHT 2
-#define ROTATE_LEFT 123
-#define ROTATE_RIGHT 124
-#define ESC 53
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
+# define MAPWIDTH 24
+# define MAPHEIGHT 24
+# define WIDTH 1920
+# define HEIGHT 1080
+
+# define BACKWARD 1
+# define FORWARD 13
+# define LEFT 0
+# define RIGHT 2
+# define ROTATE_LEFT 123
+# define ROTATE_RIGHT 124
+# define ESC 53
 
 extern int	worldmap[mapHeight][mapWidth];
 
@@ -50,30 +57,31 @@ typedef struct s_mlx {
 	int		endian;
 }	t_mlx;
 
+typedef struct s_map {
+	int	**worldmap;
+	int	map_height;
+	int	map_width;
+}	t_map;
+
 typedef struct s_texture {
-	//t_map worldmap; parsing to-do: 지금은 main문에 선언한 임시 worldmap 사용 중
-	void				*img;
-	char				*tex_path;
-	unsigned int		*tex_data;
-	int					tex_height;
-	int					tex_width;
-	int					bits_per_pixel;
-	int					size_line;
-	int					endian;
+	void			*img;
+	char			*tex_path;
+	unsigned int	*tex_data;
+	int				tex_height;
+	int				tex_width;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
 }	t_texture;
 
 typedef struct s_screen {
-	int		*floor;  //parsing to-do
-	int		*ceiling; //parsing to-do
-	t_texture *tex_ary; //parsing to-do: tex_ary 안에 tex_path 넣어주기
-	int		**buffer;
+	t_map		worldmap; // parsing to-do: 지금은 main문에 선언한 임시 worldmap 사용 중
+	int			floor;  //parsing to-do
+	int			ceiling; //parsing to-do
+	t_texture	tex_ary[4]; // ㅂㅜㄱ나ㅁ동서
+	int			**buffer;
 }	t_screen;
 
-typedef struct s_map {
-	int	**worldmap;
-	int map_height;
-	int map_width;
-}	t_map;	
 
 
 typedef struct s_calc{
@@ -104,30 +112,33 @@ typedef struct s_calc{
 }	t_calc;
 
 typedef struct s_struc{
-	t_user *user;
-	t_screen *screen;
-	t_mlx *mlx;
-} t_struc;
+	t_user		*user;
+	t_screen	*screen;
+	t_mlx		*mlx;
+}	t_struc;
 
 void	init_structs(t_user *user, t_mlx *mlx, t_screen *screen);
 void	init_screen(t_mlx *mlx, t_screen *screen);
 void	execution_main(t_user *user, t_mlx *mlx, t_screen *screen);
 void	fill_buffer(t_user *user, t_screen *screen);
-void    clear_buffer(t_screen *screen);
-void    init_buffer_with_zero(t_screen *screen);
-void    init_vars(t_user *user, t_calc *var, int x);
-void    init_step_and_sidedist(t_user *user, t_calc *var);
-void    shoot_ray(t_calc *var);
-void    fish_eye_correction(t_calc *var, t_user *user);
-void    calc_draw_y_coordinates(t_calc *var);
-void    calc_texture(t_calc *var, t_user *user, t_screen *screen, int x);
-void    calc_texture_vars(t_calc *var, t_user *user);
-void    calc_texture_coor(t_calc *var, t_screen *screen, int x);
-void    draw_buffer(t_mlx *mlx, t_screen *screen);
-void    init_tex_ary(t_mlx *mlx, t_screen *screen);
-int    key_press(int key, t_struc *struc);
-void    draw_floor_and_ceiling(t_calc *var, t_screen *screen, int x);
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void	clear_buffer(t_screen *screen);
+void	init_buffer_with_zero(t_screen *screen);
+void	init_vars(t_user *user, t_calc *var, int x);
+void	init_step_and_sidedist(t_user *user, t_calc *var);
+void	shoot_ray(t_calc *var);
+void	fish_eye_correction(t_calc *var, t_user *user);
+void	calc_draw_y_coordinates(t_calc *var);
+void	calc_texture(t_calc *var, t_user *user, t_screen *screen, int x);
+void	calc_texture_vars(t_calc *var, t_user *user);
+void	calc_texture_coor(t_calc *var, t_screen *screen, int x);
+void	draw_buffer(t_mlx *mlx, t_screen *screen);
+void	init_tex_ary(t_mlx *mlx, t_screen *screen);
+int		key_press(int key, t_struc *struc);
+
+void	draw_floor_and_ceiling(t_calc *var, t_screen *screen, int x);
 void	print_worldmap();
 
+void	parsing_map(t_screen *screen, char *path);
+
+int		exit_hook(t_mlx *mlx);
 #endif
