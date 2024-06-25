@@ -10,7 +10,7 @@ int key_press(int key, t_struc *struc)
 	{
 		new_x = (int)(struc->user->pos_x + struc->user->dir_x * struc->user->move_speed);
 		new_y = (int)(struc->user->pos_y + struc->user->dir_y * struc->user->move_speed);
-		if (!worldmap[new_y][new_x])
+		if (!struc->screen->worldmap.worldmap[new_y][new_x])
 		{
 			struc->user->pos_x += struc->user->dir_x * struc->user->move_speed;
 			struc->user->pos_y += struc->user->dir_y * struc->user->move_speed;
@@ -20,7 +20,7 @@ int key_press(int key, t_struc *struc)
 	{
 		new_x = (int)(struc->user->pos_x - struc->user->dir_x * struc->user->move_speed);
 		new_y = (int)(struc->user->pos_y - struc->user->dir_y * struc->user->move_speed);
-		if (!worldmap[new_y][new_x])
+		if (!struc->screen->worldmap.worldmap[new_y][new_x])
 		{
 			struc->user->pos_x -= struc->user->dir_x * struc->user->move_speed;
 			struc->user->pos_y -= struc->user->dir_y * struc->user->move_speed;
@@ -30,7 +30,7 @@ int key_press(int key, t_struc *struc)
 	{
 		new_x = (int)(struc->user->pos_x + struc->user->plane_x * struc->user->move_speed);
 		new_y = (int)(struc->user->pos_y + struc->user->plane_y * struc->user->move_speed);
-		if (!worldmap[new_y][new_x])
+		if (!struc->screen->worldmap.worldmap[new_y][new_x])
 		{
 			struc->user->pos_x += struc->user->plane_x * struc->user->move_speed;
 			struc->user->pos_y += struc->user->plane_y * struc->user->move_speed;
@@ -40,7 +40,7 @@ int key_press(int key, t_struc *struc)
 	{
 		new_x = (int)(struc->user->pos_x - struc->user->plane_x * struc->user->move_speed);
 		new_y = (int)(struc->user->pos_y - struc->user->plane_y * struc->user->move_speed);
-		if (!worldmap[new_y][new_x])
+		if (!struc->screen->worldmap.worldmap[new_y][new_x])
 		{
 			struc->user->pos_x -= struc->user->plane_x * struc->user->move_speed;
 			struc->user->pos_y -= struc->user->plane_y * struc->user->move_speed;

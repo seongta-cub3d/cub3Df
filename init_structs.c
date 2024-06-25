@@ -3,22 +3,20 @@
 
 void	set_user_vector(t_user *user, t_screen *screen, int y, int x)
 {
-	(void)screen;
 	user->pos_x = x;
 	user->pos_y = y;
-
-	if (worldmap[y][x] == 'N' || worldmap[y][x] == 'S')
+	if (screen->worldmap.worldmap[y][x] == 'N' || screen->worldmap.worldmap[y][x] == 'S')
 	{
 		user->dir_x = 0;
-		if (worldmap[y][x] == 'N')
+		if (screen->worldmap.worldmap[y][x] == 'N')
 			user->dir_y = -1;
 		else
 			user->dir_y = 1;
 	}
-	if (worldmap[y][x] == 'E' || worldmap[y][x] == 'W')
+	if (screen->worldmap.worldmap[y][x] == 'E' || screen->worldmap.worldmap[y][x] == 'W')
 	{
 		user->dir_y = 0;
-		if (worldmap[y][x] == 'E')
+		if (screen->worldmap.worldmap[y][x] == 'E')
 			user->dir_x = 1;
 		else
 			user->dir_x = -1;
@@ -26,25 +24,25 @@ void	set_user_vector(t_user *user, t_screen *screen, int y, int x)
 	return ;
 }
 
-void	init_camera_plane(t_user *user, int y, int x)
+void	init_camera_plane(t_user *user, t_screen *screen, int y, int x)
 {
-	if (worldmap[y][x] == 'N')
+	if (screen->worldmap.worldmap[y][x] == 'N')
 	{
 		user->plane_x = 0.66;
 		user->plane_y = 0;
 	}
-	if (worldmap[y][x] == 'S')
+	if (screen->worldmap.worldmap[y][x] == 'S')
 	{
 		user->plane_x = -0.66;
 		user->plane_y = 0;
 	}
 
-	if (worldmap[y][x] == 'W')
+	if (screen->worldmap.worldmap[y][x] == 'W')
 	{
 		user->plane_x = 0;
 		user->plane_y = -0.66;
 	}
-	if (worldmap[y][x] == 'E')
+	if (screen->worldmap.worldmap[y][x] == 'E')
 	{
 		user->plane_x = 0;
 		user->plane_y = 0.66;
@@ -60,17 +58,18 @@ void	init_user(t_user *user, t_screen *screen)
 	user->move_speed = 0.05;
 	user->rot_speed = 0.05;
 	y = -1;
-	while (++y < mapHeight)
+	while (++y < screen->worldmap.map_height)
 	{
 		x = -1;
-		while (++x < mapWidth)
+		while (++x < screen->worldmap.map_width)
 		{
-			if (worldmap[y][x] == 'N' || worldmap[y][x] == 'S' ||
-				worldmap[y][x] == 'W' || worldmap[y][x] == 'E')
+			if (screen->worldmap.worldmap[y][x] == 'N' || screen->worldmap.worldmap[y][x] == 'S' ||
+				screen->worldmap.worldmap[y][x] == 'W' || screen->worldmap.worldmap[y][x] == 'E')
 			{
 				set_user_vector(user, screen, y, x);
-				init_camera_plane(user, y, x);
-				break ;
+				init_camera_plane(user,screen, y, x);
+				screen->worldmap.worldmap[y][x] = 0;
+				return ;
 			}
 		}
 	}

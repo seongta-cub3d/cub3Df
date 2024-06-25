@@ -61,7 +61,7 @@ void    init_vars(t_user *user, t_calc *var, int x)
     return ;
 }
 
-void    shoot_ray(t_calc *var)
+void    shoot_ray(t_calc *var, t_screen *screen)
 {
 	while (var->hit == 0)
 	{
@@ -77,7 +77,7 @@ void    shoot_ray(t_calc *var)
 			var->map_y += var->step_y;
 			var->side = 1;
 		}
-		if (worldmap[var->map_y][var->map_x] > 0)
+		if (screen->worldmap.worldmap[var->map_y][var->map_x] > 0)
 		{
             var->hit = 1;
 		}

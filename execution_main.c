@@ -10,7 +10,7 @@ void	fill_buffer(t_user *user, t_screen *screen)
 	while (++x < width)
 	{
 		init_vars(user, &var, x);
-		shoot_ray(&var);
+		shoot_ray(&var, screen);
 		fish_eye_correction(&var, user);
 		calc_draw_y_coordinates(&var);
 		calc_texture(&var, user, screen, x);
