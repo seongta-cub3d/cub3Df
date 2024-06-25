@@ -125,7 +125,7 @@ void	shoot_ray(t_calc *var, t_screen *screen);
 void	fish_eye_correction(t_calc *var, t_user *user);
 void	calc_draw_y_coordinates(t_calc *var);
 void	calc_texture(t_calc *var, t_user *user, t_screen *screen, int x);
-void	calc_texture_vars(t_calc *var, t_user *user);
+void	calc_texture_vars(t_calc *var, t_user *user, t_screen *screen);
 void	calc_texture_coor(t_calc *var, t_screen *screen, int x);
 void	draw_buffer(t_mlx *mlx, t_screen *screen);
 void	init_tex_ary(t_mlx *mlx, t_screen *screen);
