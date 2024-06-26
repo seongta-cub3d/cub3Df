@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:29:54 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 17:45:39 by seongjko         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:49:52 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_struc		struc;
 	t_user		user;

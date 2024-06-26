@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:31:01 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 20:19:40 by seongjko         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:49:35 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,6 @@ void	draw_new_img(t_struc *struc);
 int		check_texture_path(t_screen *screen);
 int		is_move_possible(t_struc *struc, int new_x, int new_y);
 
-
-
 void	_error(char *msg, int error_code);
 int		check_file_name(char *path);
 int		check_num(char *num);
@@ -173,4 +171,5 @@ int		**visited_alloc(t_map *map);
 void	check_map(t_map *map);
 void	check_map_character(t_map *map);
 void	parsing_map(t_screen *screen, char *path);
+
 #endif

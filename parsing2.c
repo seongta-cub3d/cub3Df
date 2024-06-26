@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/06/26 19:23:26 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/06/26 20:33:46 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	extract_texture(t_screen *screen, int fd_tmp, int fd_real)
 	{
 		line = get_next_line(fd_tmp);
 		dump_fd(fd_real);
-		if (line[0] == '\n' || line[0] == '#')
+		if (line[0] == '\n')
 		{
 			free(line);
 			continue ;
