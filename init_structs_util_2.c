@@ -6,7 +6,7 @@
 /*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:41:15 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 17:42:36 by seongjko         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:37:02 by seongjko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,16 @@ void	init_tex_ary(t_mlx *mlx, t_screen *screen)
 	int	i;
 
 	i = -1;
+	if (!check_texture_path(screen))
+	{
+		perror("Error\nre-check texture path");
+		exit(1);
+	}
 	while (++i < 4)
 	{
 		screen->tex_ary[i].img = mlx_xpm_file_to_image(\
 		mlx->mlx, \
-		screen->tex_ary[i].tex_path, \
-		&screen->tex_ary[i].tex_width, \
+		screen->tex_ary[i].tex_path, &screen->tex_ary[i].tex_width, \
 		&screen->tex_ary[i].tex_height);
 		if (screen->tex_ary[i].img == NULL)
 		{
@@ -81,10 +85,8 @@ void	init_tex_ary(t_mlx *mlx, t_screen *screen)
 			exit(1);
 		}
 		screen->tex_ary[i].tex_data = (unsigned int *)mlx_get_data_addr(\
-			screen->tex_ary[i].img, \
-			&screen->tex_ary[i].bits_per_pixel, \
-			&screen->tex_ary[i].size_line, \
-			&screen->tex_ary[i].endian);
+			screen->tex_ary[i].img, &screen->tex_ary[i].bits_per_pixel, \
+			&screen->tex_ary[i].size_line, &screen->tex_ary[i].endian);
 	}
 	return ;
 }

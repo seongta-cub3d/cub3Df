@@ -6,7 +6,7 @@
 /*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:30:08 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 18:40:57 by seongjko         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:20:14 by seongjko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	move_forward(t_struc *struc)
 	(int)(struc->user->pos_x + struc->user->dir_x * struc->user->move_speed);
 	new_y = \
 	(int)(struc->user->pos_y + struc->user->dir_y * struc->user->move_speed);
-	if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
-		!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
+	// 	!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// 	return (1);
+	if (is_move_possible(struc, new_x, new_y))
 		return (1);
 	if (!struc->screen->worldmap.worldmap[new_y][new_x])
 	{
@@ -41,8 +43,10 @@ int	move_backward(t_struc *struc)
 	(int)(struc->user->pos_x - struc->user->dir_x * struc->user->move_speed);
 	new_y = \
 	(int)(struc->user->pos_y - struc->user->dir_y * struc->user->move_speed);
-	if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
-		!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
+	// 	!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// 	return (1);
+	if (is_move_possible(struc, new_x, new_y))
 		return (1);
 	if (!struc->screen->worldmap.worldmap[new_y][new_x])
 	{
@@ -61,8 +65,10 @@ int	move_right(t_struc *struc)
 	(int)(struc->user->pos_x + struc->user->plane_x * struc->user->move_speed);
 	new_y = \
 	(int)(struc->user->pos_y + struc->user->plane_y * struc->user->move_speed);
-	if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
-		!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
+	// 	!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// 	return (1);
+	if (is_move_possible(struc, new_x, new_y))
 		return (1);
 	if (!struc->screen->worldmap.worldmap[new_y][new_x])
 	{
@@ -81,8 +87,10 @@ int	move_left(t_struc *struc)
 	(int)(struc->user->pos_x - struc->user->plane_x * struc->user->move_speed);
 	new_y = \
 	(int)(struc->user->pos_y - struc->user->plane_y * struc->user->move_speed);
-	if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
-		!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
+	// 	!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+	// 	return (1);
+	if (is_move_possible(struc, new_x, new_y))
 		return (1);
 	if (!struc->screen->worldmap.worldmap[new_y][new_x])
 	{

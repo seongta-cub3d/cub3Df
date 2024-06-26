@@ -15,6 +15,7 @@ SRCS = 	main.c \
 		key_rotation.c \
 		floor_and_ceiling.c \
 		texture_calc_util.c \
+		check_texture_path.c \
 		parsing1.c \
 		parsing2.c \
 		parsing3.c \

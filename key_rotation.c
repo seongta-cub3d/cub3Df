@@ -6,11 +6,29 @@
 /*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:42:33 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 17:35:07 by seongjko         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:18:48 by seongjko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//1은 불가능 0은 가능
+int	is_move_possible(t_struc *struc, int new_x, int new_y)
+{
+	int	old_x;
+	int	old_y;
+
+	old_x = struc->user->pos_x;
+	old_y = struc->user->pos_y;
+	if (!(0 <= new_x && new_x < struc->screen->worldmap.map_width) || \
+		!(0 <= new_y && new_y < struc->screen->worldmap.map_height))
+		return (1);
+	if (struc->screen->worldmap.worldmap[new_y][old_x] != 0)
+		return (1);
+	if (struc->screen->worldmap.worldmap[old_y][new_x] != 0)
+		return (1);
+	return (0);
+}
 
 void	rotate_left(t_struc *struc)
 {

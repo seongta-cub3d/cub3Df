@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:31:01 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 19:16:28 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/06/26 20:19:40 by seongjko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,10 @@ void	rotate_left(t_struc *struc);
 void	rotate_right(t_struc *struc);
 int		exit_hook(t_mlx *mlx);
 void	draw_new_img(t_struc *struc);
+int		check_texture_path(t_screen *screen);
+int		is_move_possible(t_struc *struc, int new_x, int new_y);
+
+
 
 void	_error(char *msg, int error_code);
 int		check_file_name(char *path);
