@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:31:01 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 18:35:42 by seongjko         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:16:28 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include "./minilibx/mlx.h"
 # include "./libft/libft.h"
+# include "./queue.h"
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_EXIT 17
@@ -144,4 +145,28 @@ void	rotate_right(t_struc *struc);
 int		exit_hook(t_mlx *mlx);
 void	draw_new_img(t_struc *struc);
 
+void	_error(char *msg, int error_code);
+int		check_file_name(char *path);
+int		check_num(char *num);
+int		free_split(char **split_res, int code);
+int		color_data_extract(char *color);
+
+int		element_to_int(char *element);
+int		identifier_parsing(t_screen *screen, char *line, int *count);
+void	dump_fd(int fd);
+int		extract_texture(t_screen *screen, int fd_tmp, int fd_real);
+
+int		maxi(int a, int b);
+void	extract_map_size(t_map *map, int fd_tmp, int fd_real);
+void	map_alloc(t_map *map);
+void	extract_map(t_map *map, int fd_tmp, int fd_real);
+
+void	flood(t_map *map, int **visited, t_queue **queue, t_pair coor);
+void	bfs(t_map *map, int **visited, int y, int x);
+void	visited_free(t_map *map, int **visited);
+int		**visited_alloc(t_map *map);
+
+void	check_map(t_map *map);
+void	check_map_character(t_map *map);
+void	parsing_map(t_screen *screen, char *path);
 #endif
