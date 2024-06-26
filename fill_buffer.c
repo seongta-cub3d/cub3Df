@@ -1,43 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   floor_and_ceiling.c                                :+:      :+:    :+:   */
+/*   fill_buffer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 15:30:31 by seongjko          #+#    #+#             */
-/*   Updated: 2024/06/26 17:37:45 by seongjko         ###   ########.fr       */
+/*   Created: 2024/06/26 15:38:25 by seongjko          #+#    #+#             */
+/*   Updated: 2024/06/26 17:36:40 by seongjko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_floor(t_calc *var, t_screen *screen, int x)
+void	clear_buffer(t_screen *screen)
 {
 	int	y;
+	int	x;
 
-	y = var->draw_end;
-	while (y < HEIGHT)
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		screen->buffer[y][x] = screen->floor;
-		y++;
+		x = -1;
+		while (++x < WIDTH)
+			screen->buffer[y][x] = 0;
 	}
 	return ;
 }
 
-void	draw_ceiling(t_calc *var, t_screen *screen, int x)
+void	fill_buffer(t_user *user, t_screen *screen)
 {
-	int	y;
+	t_calc	var;
+	int		x;
 
-	y = -1;
-	while (++y < var->draw_start)
-		screen->buffer[y][x] = screen->ceiling;
-	return ;
-}
-
-void	draw_floor_and_ceiling(t_calc *var, t_screen *screen, int x)
-{
-	draw_ceiling(var, screen, x);
-	draw_floor(var, screen, x);
+	x = -1;
+	while (++x < WIDTH)
+	{
+		init_vars(user, &var, x);
+		shoot_ray(&var, screen);
+		fish_eye_correction(&var, user);
+		calc_draw_y_coordinates(&var);
+		calc_texture(&var, user, screen, x);
+		draw_floor_and_ceiling(&var, screen, x);
+	}
 	return ;
 }

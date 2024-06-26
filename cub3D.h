@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seongjko <seongjko@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/26 15:31:01 by seongjko          #+#    #+#             */
+/*   Updated: 2024/06/26 18:35:42 by seongjko         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -12,16 +23,8 @@
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_EXIT 17
-# define texWidth 64
-# define texHeight 64
-# define width 1920
-# define height 1080
-
-# define TEXWIDTH 64
-# define TEXHEIGHT 64
 # define WIDTH 1920
 # define HEIGHT 1080
-
 # define BACKWARD 1
 # define FORWARD 13
 # define LEFT 0
@@ -29,7 +32,6 @@
 # define ROTATE_LEFT 123
 # define ROTATE_RIGHT 124
 # define ESC 53
-
 # define NEAR_ZERO 1e-9
 
 typedef struct s_user {
@@ -72,13 +74,11 @@ typedef struct s_texture {
 
 typedef struct s_screen {
 	t_map		worldmap;
-	int			floor;  //parsing to-do
-	int			ceiling; //parsing to-do
-	t_texture	tex_ary[4]; // 북남동서
+	int			floor;
+	int			ceiling;
+	t_texture	tex_ary[4];
 	int			**buffer;
 }	t_screen;
-
-
 
 typedef struct s_calc{
 	double	camera_x;
@@ -130,10 +130,18 @@ void	calc_texture_coor(t_calc *var, t_screen *screen, int x);
 void	draw_buffer(t_mlx *mlx, t_screen *screen);
 void	init_tex_ary(t_mlx *mlx, t_screen *screen);
 int		key_press(int key, t_struc *struc);
-
 void	draw_floor_and_ceiling(t_calc *var, t_screen *screen, int x);
-
 void	parsing_map(t_screen *screen, char *path);
-
 int		exit_hook(t_mlx *mlx);
+void	init_user(t_user *user, t_screen *screen);
+void	init_mlx(t_mlx *mlx);
+void	init_screen(t_mlx *mlx, t_screen *screen);
+void	init_camera_plane(t_user *user, t_screen *screen, int y, int x);
+void	set_user_vector(t_user *user, t_screen *screen, int y, int x);
+void	init_deltadist(t_calc *var);
+void	rotate_left(t_struc *struc);
+void	rotate_right(t_struc *struc);
+int		exit_hook(t_mlx *mlx);
+void	draw_new_img(t_struc *struc);
+
 #endif

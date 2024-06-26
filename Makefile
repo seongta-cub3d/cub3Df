@@ -1,15 +1,20 @@
 CC = cc
 
-NAME = cub3D
+NAME = cub3d
 
 SRCS = 	main.c \
 		draw_buffer.c \
 		execution_main.c \
-		fill_buffer_util.c \
+		fill_buffer.c \
+		fill_buffer_util_1.c \
+		fill_buffer_util_2.c \
 		init_structs.c \
-		init_screen_util.c \
+		init_structs_util_1.c \
+		init_structs_util_2.c \
 		key_press.c \
+		key_rotation.c \
 		floor_and_ceiling.c \
+		texture_calc_util.c \
 		parsing.c \
 		queue1.c \
 		queue2.c
