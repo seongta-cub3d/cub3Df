@@ -15,7 +15,11 @@ SRCS = 	main.c \
 		key_rotation.c \
 		floor_and_ceiling.c \
 		texture_calc_util.c \
-		parsing.c \
+		parsing1.c \
+		parsing2.c \
+		parsing3.c \
+		parsing4.c \
+		parsing5.c \
 		queue1.c \
 		queue2.c
 
@@ -42,13 +46,13 @@ $(NAME) : $(OBJS)
 clean:
 	rm -f ${OBJS}
 	rm -f ${B_OBJS}
-	$(MAKE) -C libft clean
+	$(MAKE) -C libft fclean
 	$(MAKE) -C minilibx clean
 
 fclean : clean
 	rm -f ${NAME}
 	rm -f ${B_NAME}
-	$(MAKE) -C libft clean
+	$(MAKE) -C libft fclean
 	$(MAKE) -C minilibx clean
 
 re :

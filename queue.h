@@ -6,7 +6,7 @@
 /*   By: tajeong <tajeong@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:52 by tajeong           #+#    #+#             */
-/*   Updated: 2024/06/25 16:39:33 by tajeong          ###   ########.fr       */
+/*   Updated: 2024/06/26 19:16:55 by tajeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define QUEUE_H
 
 # include "./libft/libft.h"
-
 
 typedef struct s_queue {
 	int				y;
